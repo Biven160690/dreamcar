@@ -17,7 +17,7 @@
               Convallis a cras semper auctor neque vitae tempus. Nulla
               pellentesque dignissim
             </p>
-            <NuxtLink to="signup"><button>PARTICIPATE</button></NuxtLink>
+            <NuxtLink to="/LOTS_SERGEY"><button>PARTICIPATE</button></NuxtLink>
           </div>
         </div>
       </div>
@@ -67,7 +67,15 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapActions } from "vuex";
+export default {
+  methods: mapActions(["fetchUsers"]),
+
+  // Вызов экшна fetchUsers после загрузки DOM для получения users
+  async mounted() {
+    this.fetchUsers();
+  }
+};
 </script>
 
 <style scoped>

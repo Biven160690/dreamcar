@@ -7,8 +7,29 @@
         <h3><NuxtLink class="link__logo" to="/">DreamCar</NuxtLink></h3>
         <div class="navlinks">
           <h4><NuxtLink to="/LOTS_SERGEY" class="link">Lots</NuxtLink></h4>
-          <h4><NuxtLink to="/signin" class="link">Sign in</NuxtLink></h4>
-          <h4><NuxtLink to="/signup" class="link">Sign up</NuxtLink></h4>
+          <h4>
+            <NuxtLink v-if="!isLogged" to="/signin" class="link"
+              >Sign in</NuxtLink
+            >
+          </h4>
+          <h4>
+            <NuxtLink v-if="!isLogged" to="/signup" class="link"
+              >Sign up</NuxtLink
+            >
+          </h4>
+          <div class="user__settings__nav" v-if="isLogged">
+            <img
+              src="@/assets/img/user-settings-logo.png"
+              alt="settings"
+              width="22px"
+              height="20px"
+            />
+            <h4>
+              <NuxtLink to="/signup" class="link">{{
+                loggedUser.name
+              }}</NuxtLink>
+            </h4>
+          </div>
         </div>
       </div>
     </div>
@@ -16,7 +37,26 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  data: () => ({
+  }),
+
+  methods: {
+    ...mapGetters(["isUserLogged", "getLoggedUser"])
+  },
+
+  computed: {
+    isLogged() {
+      return this.isUserLogged();
+    },
+    loggedUser() {
+      var loggedUser = this.getLoggedUser();
+      console.log(loggedUser);
+      return loggedUser;
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -68,5 +108,14 @@ h3 {
 .link__logo.nuxt-link-active {
   color: black;
   border-bottom: 0px;
+}
+
+.user__settings__nav {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+.user__settings__nav img {
+  margin-right: -30px;
 }
 </style>
