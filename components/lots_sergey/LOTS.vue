@@ -1,143 +1,121 @@
-<template>
-<form>
-<div class="class1">
-<div class="thumb img">
-<h2 class="h2"> BRAKE DISC </h2>
-<a><img src="~/assets/img/dick1.jpg"  alt="react" class="leftimg"> </a>
- <p class="p"><strong>ID:</strong> 415533<br>
- <strong>QUANTITI:</strong> 15<br>
- <strong>DESIRED PRICE:</strong> 500$<br>
- <strong>EXPIRATION DATE:</strong> 22.02.2021 18:00<br>
- <strong>STATUS:</strong> Open</p>
-</div>
-<div class="bid ">
-<div>
- <h2 class="time">TIME LEFT: 16:02:05</h2>
- <h2 class="price"> CURRET BIT: 1200$</h2>
-</div>
- <div class="rest"><v-btn
-     elevation="6"
-      x-large
-    color="#B0E0E6"
-   >MORE INFO</v-btn>
-</div>
-</div>
-</div>
-<div class="class1">
-<div class="thumb img">
-<h2 class="h2"> BRAKE DISC </h2>
-<a><img src="~/assets/img/dick1.jpg"  alt="react" class="leftimg"> </a>
- <p class="p"><strong>ID:</strong> 415533<br>
- <strong>QUANTITI:</strong> 15<br>
- <strong>DESIRED PRICE:</strong> 500$<br>
- <strong>EXPIRATION DATE:</strong> 22.02.2021 18:00<br>
- <strong>STATUS:</strong> Open</p>
-</div>
-<div class="bid ">
-<div>
- <h2 class="time">TIME LEFT: 16:02:05</h2>
- <h2 class="price"> CURRET BIT: 1200$</h2>
-</div>
- <div class="rest"><v-btn
-     elevation="6"
-      x-large
-    color="#B0E0E6"
-   >MORE INFO</v-btn>
-</div>
-</div>
-</div>
-</form>
+<<template>
+  <div>
+    <div class="class1" v-for="lots in getAllLots" :key="lots.id">
+      <div class="thumb img">
+        <h2 class="h2">{{ lots.name }}</h2>
+        <a><img src="~/assets/img/dick1.jpg" alt="react" class="leftimg" /> </a>
+        <!-- <p class="p" v-if="lots.desired == lots.bit"> -->
+        <p class="p">
+          <strong>ID:</strong> {{ lots.id }}<br />
+          <strong>QUANTITI:</strong> {{ lots.quantity }}<br />
+          <strong>DESIRED PRICE:</strong>{{ lots.desired }} <br />
+          <strong>EXPIRATION DATE:</strong> {{ lots.expiratedate }}<br />
+          <!-- <strong>STATUS:</strong> Closed <br /> -->
+          <strong>STATUS:</strong> {{ lots.status }} <br />
+        </p>
+        <!-- <p class="p" v-else>
+          <strong>ID:</strong> {{ lots.id }}<br />
+          <strong>QUANTITI:</strong> {{ lots.quantity }}<br />
+          <strong>DESIRED PRICE:</strong> {{ lots.desired }} <br />
+          <strong>EXPIRATION DATE:</strong> {{ lots.expiratedate }}<br />
+          <strong>STATUS:</strong> {{ lots.status }} <br />
+        </p> -->
+      </div>
+      <div class="price">
+        <!-- <div class="timer" v-if="lots.desired !== lots.bit"> -->
+        <div class="timer">
+          <h3 id="h3">TIME LIFE:</h3>
+          <timer v-bind:deadline="lots.time" class="size"> </timer>
+        </div>
+        <div class="curret_bit">
+          <h3>CURRET BIT: {{ lots.bit }} $</h3>
+          <div class="button">
+            <NuxtLink to="/" class="none">
+              <v-btn elevation="6" x-large color="#B0E0E6" @click='changeStatus'>MORE INFO</v-btn>
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
-
 <script>
-  export default {
+import timer from "@/components/lots_sergey/timer.vue";
+import { mapGetters} from "vuex";
+export default {
+  computed: mapGetters(["getAllLots"]),
+  components: {
+    timer
+  },
 
-  }
+};
 </script>
 
 <style>
 
-.time /* Время */ {
-
-   padding: 0px 30px 0px 40px;
-   font-size: 250%; /* Размер шрифта */ /*Lинии под текстом*/
-   float: right;
-
+.price /* див для правого угла  */ {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px 0px 0px;
 }
-.bid  /* родительский див 2 */ {
-
-   display: flex;
-   flex-flow: column;
-   padding: 0px 0px 15px 0px;
-
+.curret_bit {
+  padding: 0px 0px 0px 170px;
+  margin: 0px 0px 0px 100px;
 }
-
-  .rest /* кнопка */ {
-  margin: 0px 10px 0px 25px;
-  padding:0px 0px 50px 240px;
-  /* float: right; */
-  /* align-items: center; */
-  }
-
-
-  .price /* цена */ {
-   padding: 0px 0px 70px 170px;
-   font-size: 170%; /* Размер шрифта */
-   /* float: right; */
-
-  }
-
-
- .class1 {
-
-     /* background-color: rgb(233, 233, 223); */
-     /* width:100%; */
-     width:100%;
-     display:flex;
-     align-items: flex-end;
-     /* justify-content: flex-end; */
-     justify-content: space-between;
-     border-radius: 10px;
-     padding: 10px; /* отступ внутри блоков*/
-       margin: 30px 0px 25px 0px; /* отступ главного блока */
-     /* overflow:auto;будет прокручиваться тест в блоке, появиться скрол снизу и сверху */
-     box-shadow: 5px 5px 5px 5px rgb(94, 87, 87);
-
-
+.timer /* счетчик */ {
+  padding: 0px 0px 0px 220px;
+  font-size: 120%;
+  color: rgb(228, 133, 133);
+  display: flex;
+}
+.size {
+  font-size: 120%;
+}
+#h3 {
+  color: rgb(17, 17, 17);
+}
+.button /* регулировка кнопки */ {
+  display: flex;
+  justify-content: flex-end;
+  padding: 30px 0px 0px 0px;
+  margin: 20px 20px 0px 0px;
+}
+.none {
+  text-decoration: none;
 }
 
-
- .thumb img  {
-
-     /* background-color: rgb(250, 253, 253); */
-     /* float:left; */
-     border: 2px solid #121313;
-     border-radius: 5px;
-     width: 178px;
-     height: 190px;
-     box-shadow: 3px 3px 3px 3px rgb(189, 180, 180);
+.class1 {
+  background-color: #e3e3e3;
+  width: 99%;
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 5px; /* отступ внутри блоков*/
+  margin: 10px 5px 25px 8px; /* отступ главного блока */
+  box-shadow: 5px 5px 5px 5px rgb(94, 87, 87);
 }
- .leftimg {
-
-    float:left;
-    margin: 15px 7px 3px 3px;
-    padding: 10px 0px 0px 0px;
-
-   }
-
- .h2 {
-
-    font-size: 250%; /* Размер шрифта */ /*Lинии под текстом*/
-    /* border-bottom: 2px solid rgb(231, 38, 38);Параметры линии под текстом */
-    font-weight: normal; /* Убираем жирное начертание */
-    padding-bottom: 5px; /* Расстояние от текста до линии */
+.thumb img {
+  border: 2px solid #121313;
+  border-radius: 5px;
+  width: 178px;
+  height: 190px;
+  box-shadow: 3px 3px 3px 3px rgb(189, 180, 180);
 }
-  .p {
-    float:left;
-    /* display: block; даем возможность padding работать с текстом */
-    padding: 25px 0px 15px  10px; /*отстууп внутри*/
-    font-size: 18px; /*размер текста*/
-    line-height: 1.9; /*расстояние  между строкома*/
-    /* overflow:auto;будет прокручиваться тест в блоке, появиться скрол снизу и сверху */
+.leftimg {
+  float: left;
+  margin: 15px 7px 3px 3px;
+  padding: 0px 0px 0px 0px;
+}
+.h2 {
+  font-size: 250%; /* Размер шрифта */ /*Lинии под текстом*/
+  font-weight: normal; /* Убираем жирное начертание */
+  padding-bottom: 5px; /* Расстояние от текста до линии */
+}
+.p {
+  float: left;
+  padding: 25px 0px 15px 10px; /*отстууп внутри*/
+  font-size: 18px; /*размер текста*/
+  line-height: 1.9; /*расстояние  между строкома*/
 }
 </style>

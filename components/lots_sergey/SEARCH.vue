@@ -1,18 +1,18 @@
 <template>
-<div class="parent">
+<div class="parent" id="app" data-app >
   <div class="auctions">
   <h1>AUCTIONS</h1>
     </div>
       <div class="data">
       <v-select
-        :items="items"
+        :items="getAddStatus"
         :menu-props="{ up: true, offsetY: true }"
         label="Status"
       ></v-select>
       </div>
-      <div class="data1">
+      <div class="data">
         <v-select
-        :items="items"
+        :items="getAddName"
         :menu-props="{ up: true, offsetY: true }"
         label="Name"
       ></v-select>
@@ -25,10 +25,10 @@
 
 
 <script>
+import { mapGetters } from "vuex";
   export default {
-    data: () => ({
-      items: [ 'BRAKE DISC' , 'Foo4r4r4r4r', 'Bar', 'Fizz', 'Buzz'],
-    }),
+    computed: mapGetters(["getAddStatus", "getAddName"]),
+
   }
 </script>
 
@@ -37,22 +37,16 @@
 .parent {
 display: flex;
 justify-content: space-between;
-margin: 10px -2px 0px 0px;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 10px 0px;
 }
 .data {
-padding: 0px 0px 0px 0px;
 width: 30%;
-}
-.data1 {
-  width: 30%;
-}
-.button {
-padding: 10px 0px 0px 0px;
-margin: 0px 0px 0px 0px;
+padding: 35px 0px 0px 40px;
+margin: 0px 0px 0px 70px;
 }
 .auctions {
-/* text-align: center; */
-padding: 30px 0px 0px 10px;
+padding: 35px 20px 0px 40px;
 }
 
 </style>
