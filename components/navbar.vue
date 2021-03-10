@@ -6,7 +6,7 @@
       <div class="navbar__content">
         <h3><NuxtLink class="link__logo" to="/">DreamCar</NuxtLink></h3>
         <div class="navlinks">
-          <h4><NuxtLink to="/LOTS_SERGEY" class="link">Lots</NuxtLink></h4>
+          <h4><NuxtLink to="/lots" class="link">Lots</NuxtLink></h4>
           <h4>
             <NuxtLink v-if="!isLogged" to="/signin" class="link"
               >Sign in</NuxtLink

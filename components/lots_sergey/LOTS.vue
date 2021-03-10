@@ -29,9 +29,9 @@
         </div>
         <div class="curret_bit">
           <h3>CURRET BIT: {{ lots.bit }} $</h3>
-          <div class="button">
-            <NuxtLink to="/" class="none">
-              <v-btn elevation="6" x-large color="#B0E0E6" @click='changeStatus'>MORE INFO</v-btn>
+          <div class="button"
+            <NuxtLink :to="'lots/' + lots.id" class="none">
+              <v-btn elevation="6" x-large color="#B0E0E6">MORE INFO</v-btn>
             </NuxtLink>
           </div>
         </div>
@@ -41,18 +41,17 @@
 </template>
 <script>
 import timer from "@/components/lots_sergey/timer.vue";
-import { mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 export default {
   computed: mapGetters(["getAllLots"]),
   components: {
     timer
   },
-
+  props: ["id"]
 };
 </script>
 
 <style>
-
 .price /* див для правого угла  */ {
   display: flex;
   flex-direction: column;
@@ -88,19 +87,16 @@ export default {
   background-color: #e3e3e3;
   width: 99%;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: space-between;
   border-radius: 10px;
   padding: 5px; /* отступ внутри блоков*/
   margin: 10px 5px 25px 8px; /* отступ главного блока */
-  box-shadow: 5px 5px 5px 5px rgb(94, 87, 87);
 }
 .thumb img {
-  border: 2px solid #121313;
   border-radius: 5px;
   width: 178px;
   height: 190px;
-  box-shadow: 3px 3px 3px 3px rgb(189, 180, 180);
 }
 .leftimg {
   float: left;

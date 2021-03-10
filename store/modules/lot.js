@@ -36,6 +36,6 @@ export default {
     },
     getAddName(state) {
       return state.addName;
-    }
+    },
   }
 };
