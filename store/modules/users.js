@@ -46,10 +46,10 @@ export default {
                     users[i].passw = "12345"
                 }
                 state.users = users
-                
+
             }
         },
-        // Мутация для добваления user в state
+        // Мутация для                 добваления user в state
         pushUser(state, user) {
             state.users.push(user);
         },
@@ -70,9 +70,9 @@ export default {
             return state.users
         },
         getUserById(state) {
-            var result = {};
-            return result = state.users.filter(obj => {
-                return obj.id === 2
+          var result = {};
+          return result = state.users.filter(obj => {
+                            return obj.id === 2
             })
         },
         isUserLogged(state) {

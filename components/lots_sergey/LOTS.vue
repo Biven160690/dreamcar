@@ -4,25 +4,15 @@
       <div class="thumb img">
         <h2 class="h2">{{ lots.name }}</h2>
         <a><img src="~/assets/img/dick1.jpg" alt="react" class="leftimg" /> </a>
-        <!-- <p class="p" v-if="lots.desired == lots.bit"> -->
-        <p class="p">
+          <p class="p">
           <strong>ID:</strong> {{ lots.id }}<br />
           <strong>QUANTITI:</strong> {{ lots.quantity }}<br />
           <strong>DESIRED PRICE:</strong>{{ lots.desired }} <br />
-          <strong>EXPIRATION DATE:</strong> {{ lots.expiratedate }}<br />
-          <!-- <strong>STATUS:</strong> Closed <br /> -->
+          <strong>EXPIRATION DATE:</strong> {{ lots.time }}<br />
           <strong>STATUS:</strong> {{ lots.status }} <br />
         </p>
-        <!-- <p class="p" v-else>
-          <strong>ID:</strong> {{ lots.id }}<br />
-          <strong>QUANTITI:</strong> {{ lots.quantity }}<br />
-          <strong>DESIRED PRICE:</strong> {{ lots.desired }} <br />
-          <strong>EXPIRATION DATE:</strong> {{ lots.expiratedate }}<br />
-          <strong>STATUS:</strong> {{ lots.status }} <br />
-        </p> -->
       </div>
       <div class="price">
-        <!-- <div class="timer" v-if="lots.desired !== lots.bit"> -->
         <div class="timer">
           <h3 id="h3">TIME LIFE:</h3>
           <timer v-bind:deadline="lots.time" class="size"> </timer>
@@ -31,17 +21,17 @@
           <h3>CURRET BIT: {{ lots.bit }} $</h3>
           <div class="button">
             <NuxtLink to="/" class="none">
-              <v-btn elevation="6" x-large color="#B0E0E6" @click='changeStatus'>MORE INFO</v-btn>
+              <v-btn elevation="6" x-large color="#B0E0E6" >MORE INFO</v-btn>
             </NuxtLink>
           </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import timer from "@/components/lots_sergey/timer.vue";
-import { mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 export default {
   computed: mapGetters(["getAllLots"]),
   components: {
@@ -52,7 +42,6 @@ export default {
 </script>
 
 <style>
-
 .price /* див для правого угла  */ {
   display: flex;
   flex-direction: column;
@@ -88,7 +77,7 @@ export default {
   background-color: #e3e3e3;
   width: 99%;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: space-between;
   border-radius: 10px;
   padding: 5px; /* отступ внутри блоков*/

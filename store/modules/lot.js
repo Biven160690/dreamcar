@@ -6,9 +6,8 @@ export default {
         id: 1,
         quantity: 15,
         desired: 1500,
-        expiratedate: "22.02.2021 18:00",
-        status: "Closed",
-        time: "03/10/2021",
+        status: "Open",
+        time: "03/18/2021",
         bit: 1500
       },
       {
@@ -16,15 +15,33 @@ export default {
         id: 2,
         quantity: 30,
         desired: 150,
-        expiratedate: "22.02.2021 18:00",
         status: "Open",
-        time: "03/08/2021",
-        bit: 150
+        time: "03/10/2021",
+        bit: 180
       }
     ],
 
     addStatus: ["Open", "Closed"],
     addName: ["KOLO", "BRAKE DICS"]
+  },
+
+  mutations: {
+    changeStatus(state) {
+      for (var i = 0; i < state.lots.length; i++) {
+        if (state.lots[i].desired == state.lots[i].bit) {
+          state.lots[i].status = "Closed", state.lots[i].time = "Time Up"
+        }
+      }
+    },
+    chanStatus(state) {
+      var time = new Date()
+      for (var i = 0; i < state.lots.length; i++) {
+        if ( Date.parse(state.lots[i].time) < time ) {
+
+           state.lots[i].status = "Closed";
+        }
+      }
+    }
   },
 
   getters: {

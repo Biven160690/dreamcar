@@ -10,12 +10,13 @@
       }}
     </p>
     <p v-if="!currentTime">
-      Times Up
+      Time Up
     </p>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: {
     deadline: {
@@ -36,6 +37,7 @@ export default {
     setTimeout(this.countdown, 1);
   },
   methods: {
+  ...mapMutations(["chanStatus"]),
     countdown() {
       let t = Date.parse(this.deadline) - Date.parse(new Date());
       let seconds = Math.floor((t / 1000) % 60);
@@ -53,8 +55,10 @@ export default {
         setTimeout(this.countdown, this.speed);
       } else {
         this.currentTime = null;
+        this.chanStatus(t)
       }
-    }
+    },
+
   }
 };
 </script>
