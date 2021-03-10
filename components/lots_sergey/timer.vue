@@ -37,7 +37,7 @@ export default {
     setTimeout(this.countdown, 1);
   },
   methods: {
-  ...mapMutations(["chanStatus"]),
+  ...mapMutations(["changeStatusbyTimer"]),
     countdown() {
       let t = Date.parse(this.deadline) - Date.parse(new Date());
       let seconds = Math.floor((t / 1000) % 60);
@@ -55,7 +55,7 @@ export default {
         setTimeout(this.countdown, this.speed);
       } else {
         this.currentTime = null;
-        this.chanStatus(t)
+        this.changeStatusbyTimer(t)
       }
     },
 
