@@ -33,7 +33,7 @@ export default {
         }
       }
     },
-    chanStatus(state) {
+    changeStatusbyTimer(state) {
       var time = new Date()
       for (var i = 0; i < state.lots.length; i++) {
         if ( Date.parse(state.lots[i].time) < time ) {
