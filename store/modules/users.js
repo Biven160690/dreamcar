@@ -1,7 +1,5 @@
 //Модуль store для users
 
-import { email } from "vuelidate/lib/validators";
-
 /*  {
 "id": 1,
 "name": "Leanne Graham",
@@ -41,12 +39,13 @@ export default {
     // Мутация для изменения users в state
     mutations: {
         updateUsers(state, users) {
+            // данные из jsonplaceholder заносятся в стор если массив пустой
             if (!(state.users.length > 0)) {
-                for (var i = 0; i < users.length; i++){
+                for (var i = 0; i < users.length; i++) {
+                    // у всех пользователей устанавливается пароль 12345
                     users[i].passw = "12345"
                 }
                 state.users = users
-                
             }
         },
         // Мутация для добваления user в state
@@ -61,11 +60,18 @@ export default {
         },
     },
     state: {
+        /*
+            isUserLogged хранит состояние есть ли авторизированный user
+            loggedUser хранит объект авторизированного пользователя
+            users хранит массив объектов всех пользователей
+        */
         isUserLogged: false,
         loggedUser: [],
         users: []
     },
     getters: {
+
+        // возвращает всех юзеров -> users
         getAllUsers(state) {
             return state.users
         },
@@ -75,6 +81,7 @@ export default {
                 return obj.id === 2
             })
         },
+        // возвращает состояние отображающее авторизирован ли кто-нибудь
         isUserLogged(state) {
             if (state.isUserLogged) {
                 return true
@@ -82,6 +89,7 @@ export default {
                 return false
             }
         },
+        // возвращает объект авторизированного пользователя
         getLoggedUser(state) {
             return state.loggedUser[0]
         }

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
 <SEARCH/>
 <LOTS/>
 </div>
@@ -9,10 +9,9 @@
 import SEARCH from "@/components/lots_sergey/SEARCH.vue";
 import LOTS from "@/components/lots_sergey/LOTS.vue";
 export default {
-
   components: {
     SEARCH,
     LOTS
-   }
+   },
 }
 </script>

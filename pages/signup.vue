@@ -7,6 +7,8 @@
       <p>
         ALREADY A MEMBER? <NuxtLink class="link" to="/signin">SIGN IN</NuxtLink>
       </p>
+      <!-- Отображается если пользователь пытается зарегистрироваться с email,
+      который уже есть в store-->
       <p v-if="exists" class="user__exists">
         User with this email already exists
       </p>
@@ -79,7 +81,7 @@ import {
 } from "vuelidate/lib/validators";
 export default {
   mixins: [validationMixin],
-
+  // правила валидации для инпутов
   validations: {
     name: { required, minLength: minLength(3), maxLength: maxLength(10) },
     email: { required, email },
@@ -96,7 +98,7 @@ export default {
     passw: "",
     exists: false
   }),
-
+  // обработчики ошибок инпутов
   computed: {
     nameErrors() {
       const errors = [];
@@ -146,7 +148,9 @@ export default {
   methods: {
     ...mapMutations(["pushUser", "pushLoggedUser"]),
     ...mapGetters(["getAllUsers"]),
+
     submit() {
+      /* Получаем всех юеров геттером и ищем совпадения по email */
       var users = this.getAllUsers();
       var isExists = users.some(user => user.email === this.email);
       if (!isExists) {
@@ -158,9 +162,10 @@ export default {
           tel: this.tel,
           passw: this.passw
         };
+        /* пушим нового юзера, пушим данного юзера в loggedUser и переходим на другую страницу */
         this.pushUser(user);
         this.pushLoggedUser(user);
-        this.$router.push("LOTS_SERGEY");
+        this.$router.push("lots");
       } else {
         this.exists = true;
       }
