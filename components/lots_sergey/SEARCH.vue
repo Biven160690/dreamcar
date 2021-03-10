@@ -13,7 +13,7 @@
       </div>
       <div class="data">
         <v-select
-        v-model="selectedPart"
+        v-model="partNameList"
         :items="getAllParts"
         :item-text="'name'"
         :item-value="'id'"

@@ -155,12 +155,12 @@ export default {
           name: this.name,
           email: this.email,
           company: this.company,
-          tel: this.tel,
+          phone: this.tel,
           passw: this.passw
         };
         this.pushUser(user);
         this.pushLoggedUser(user);
-        this.$router.push("LOTS_SERGEY");
+        this.$router.push("lots");
       } else {
         this.exists = true;
       }

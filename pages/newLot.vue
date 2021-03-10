@@ -1,6 +1,6 @@
-<!-- —траница дл€ создани€ нового лота-->
+<!-- cтраница для создания нового лота-->
 
-<!-- дл€ работы v-select с массивом объектов
+<!-- для работы v-select с массивом объектов
       нужно в родительском теге div указать 
       id="app" data-app
       а в самом v-select задать опцию return-object-->
@@ -43,7 +43,7 @@
         ></v-text-field>
       </div>
       <div class="div3">
-        <v-btn class="cancel" @click="clear"> cancel </v-btn>
+        <v-btn class="clear" @click="clear"> clear </v-btn>
         <v-btn class="submit" @click="submit"> add </v-btn>
       </div>
     </div>
@@ -109,17 +109,17 @@ export default {
         desiredPrice: this.price,
       };
       this.pushLot(newLot);
-      this.$router.push("LOTS_SERGEY");
+      this.$router.push("lots");
       alert("New lot for Part.name = '" + this.selectedPart.name + "' added!");
     },
     clear() {
       //this.$v.$reset()
       //this.select = null
+      this.selectedPart = "";
       this.description = "";
       this.price = "";
       this.quantity = "";
       this.expirationDate = "";
-      this.selectedPart = "";
     },
   },
 };
@@ -157,7 +157,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
-.cancel {
+.clear {
   background: rgb(239, 133, 140);
   width: 20%;
   margin-bottom: 3%;

@@ -17,7 +17,7 @@
               Convallis a cras semper auctor neque vitae tempus. Nulla
               pellentesque dignissim
             </p>
-            <NuxtLink to="/LOTS_SERGEY"><button>PARTICIPATE</button></NuxtLink>
+            <NuxtLink to="/lots"><button>PARTICIPATE</button></NuxtLink>
           </div>
         </div>
       </div>

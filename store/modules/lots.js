@@ -12,7 +12,7 @@ export default {
                 "status": "open",
                 "expirationDate": "2021-03-18",
                 "desiredPrice": 90,
-                "bit": 120
+                "bid": 120
               },
               {
                 "id": 2,
@@ -23,7 +23,7 @@ export default {
                 "status": "closed",
                 "expirationDate": "2021-03-09",
                 "desiredPrice": 75,
-                "bit": 70
+                "bid": 70
               },
         ],
 
@@ -35,6 +35,29 @@ export default {
         pushLot(state, lot) {
             state.lots.push(lot);
         },
+        updateStatuses(state) {
+            var time = new Date()
+            for (var i = 0; i < state.lots.length; i++) {
+              if (state.lots[i].desired >= state.lots[i].bit ||
+                Date.parse(state.lots[i].time) < time) {
+                    if(state.lots[i].status != "closed")
+                    {
+                        state.lots[i].status = "closed";
+                        alert("Auction for lot.id = " + state.lots[i].id + " stopped!");
+                    }
+              }
+            }
+          },
+          /*
+          changeStatusbyTimer(state) {
+            var time = new Date()
+            for (var i = 0; i < state.lots.length; i++) {
+              if ( Date.parse(state.lots[i].time) < time ) {
+      
+                 state.lots[i].status = "Closed";
+              }
+            }
+          }*/
     },
     getters: {
         getAllLots(state) {

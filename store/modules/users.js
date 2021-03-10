@@ -38,27 +38,60 @@ export default {
             ctx.commit('updateUsers', users)
         }
     },
+    state: {
+        /*
+            isUserLogged хранит состояние, есть ли авторизированный user
+            isUserDreamCar хранит состояние, являтся ли юзер представителем заказчика
+            loggedUser хранит объект авторизированного пользователя
+            users хранит массив объектов всех пользователей
+        */
+        isUserLogged: false,
+        isUserDreamCar: false,
+        loggedUser: [],
+        users: []
+    },
     // Мутация для изменения users в state
     mutations: {
+        // данные из jsonplaceholder заносятся в стор, если массив пустой
         updateUsers(state, users) {
-            if (!(state.users.length > 0)) {
-                for (var i = 0; i < users.length; i++){
-                    users[i].passw = "12345"
-                }
-                state.users = users
-                
+            if (users.length > 0) {
+                for (var i = 0; i < users.length; i++) {
+                    // у всех пользователей устанавливается пароль 12345
+                    users[i].passw = "12345";
+                    var user = {
+                        id: users[i].id,
+                        name: users[i].name,
+                        email: users[i].email,
+                        company: users[i].company.name,
+                        phone: users[i].phone,
+                        passw: users[i].passw
+                      };
+                    state.users.push(user);
+                };
+                //state.users = users
             }
         },
+        updateLoggedUser(state, user) {
+            for (var i = 0; i < state.users.length; i++) {
+                if (state.users[i].id == user.id) {
+                    state.users[i].name = user.name;
+                    state.users[i].email = user.email;
+                    state.users[i].company = user.company;
+                    state.users[i].phone = user.phone;
+                }
+            }
+        },
+
         // Мутация для добваления user в state
         pushUser(state, user) {
             state.users.push(user);
         },
 
-        // Мутация для добваления logged user в state
+        // Мутация для добваления logged user в state и установка флага 'заказчика'
         pushLoggedUser(state, user) {
             state.loggedUser.push(user);
             state.isUserLogged = true;
-            //if (user.company === 'DreamCar') {
+            //является ли юзер представителем заказчика (по имейлу)
             if (user.email === 'dream_car@gmail.ru') {
                 state.isUserDreamCar = true;
             }
@@ -66,12 +99,6 @@ export default {
                 state.isUserDreamCar = false;
             }
         },
-    },
-    state: {
-        isUserLogged: false,
-        isUserDreamCar: false,
-        loggedUser: [],
-        users: []
     },
     getters: {
         getAllUsers(state) {
@@ -83,12 +110,15 @@ export default {
                 return obj.id === 2
             })
         },
+        // возвращает состояние отображающее, авторизирован ли кто-нибудь
         isUserLogged(state) {
             return state.isUserLogged
         },
+        // возвращает состояние, являтся ли юзер представителем заказчика
         isUserDreamCar(state) {
             return state.isUserDreamCar
         },
+        // возвращает объект авторизированного пользователя
         getLoggedUser(state) {
             return state.loggedUser[0]
         }

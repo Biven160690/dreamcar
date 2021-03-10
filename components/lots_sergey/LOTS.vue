@@ -4,34 +4,24 @@
       <div class="thumb img">
         <h2 class="h2">{{ lot.part_name }}</h2>
         <a><img src="~/assets/img/dick1.jpg" alt="react" class="leftimg" /> </a>
-        <!-- <p class="p" v-if="lots.desired == lots.bit"> -->
         <p class="p">
           <strong>ID:</strong> {{ lot.id }}<br />
           <strong>QUANTITY:</strong> {{ lot.quantity }}<br />
           <strong>DESIRED PRICE:</strong>{{ lot.desiredPrice }} <br />
           <strong>EXPIRATION DATE:</strong> {{ lot.expirationDate }}<br />
-          <!-- <strong>STATUS:</strong> Closed <br /> -->
           <strong>STATUS:</strong> {{ lot.status }} <br />
         </p>
-        <!-- <p class="p" v-else>
-          <strong>ID:</strong> {{ lots.id }}<br />
-          <strong>QUANTITI:</strong> {{ lots.quantity }}<br />
-          <strong>DESIRED PRICE:</strong> {{ lots.desired }} <br />
-          <strong>EXPIRATION DATE:</strong> {{ lots.expiratedate }}<br />
-          <strong>STATUS:</strong> {{ lots.status }} <br />
-        </p> -->
       </div>
       <div class="price">
-        <!-- <div class="timer" v-if="lots.desired !== lots.bit"> -->
         <div class="timer">
           <h3 id="h3">TIME LIFE:</h3>
           <timer v-bind:deadline="lot.expirationDate" class="size"> </timer>
         </div>
-        <div class="curret_bit">
-          <h3>CURRET BIT: {{ lot.bit }} $</h3>
+        <div class="curret_bid">
+          <h3>CURRET BID: {{ lot.bid }} $</h3>
           <div class="button">
-            <NuxtLink to="/" class="none">
-              <v-btn elevation="6" x-large color="#B0E0E6" @click='changeStatus'>MORE INFO</v-btn>
+            <NuxtLink to="'lots/' + lots.id" class="none">
+              <v-btn elevation="6" x-large color="#B0E0E6">MORE INFO</v-btn>
             </NuxtLink>
           </div>
         </div>
@@ -43,10 +33,11 @@
 import timer from "@/components/lots_sergey/timer.vue";
 import { mapGetters} from "vuex";
 export default {
-  computed: mapGetters(["getAllLots"]),
+  computed: mapGetters(["getAllLots","updateStatuses"]),
   components: {
     timer
   },
+  props: ["id"]
 
 };
 </script>
@@ -58,7 +49,7 @@ export default {
   flex-direction: column;
   padding: 0px 20px 0px 0px;
 }
-.curret_bit {
+.curret_bid {
   padding: 0px 0px 0px 170px;
   margin: 0px 0px 0px 100px;
 }
