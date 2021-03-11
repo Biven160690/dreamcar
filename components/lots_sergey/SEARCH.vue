@@ -5,7 +5,6 @@
     </div>
       <div class="data">
       <v-select
-        v-model="selectedStatus"
         :items="getStatuses"
         :menu-props="{ up: true, offsetY: true }"
         label="Status"
@@ -13,7 +12,6 @@
       </div>
       <div class="data">
         <v-select
-        v-model="partNameList"
         :items="getAllParts"
         :item-text="'name'"
         :item-value="'id'"
@@ -31,6 +29,8 @@
 
 
 <script>
+//v-model="selectedStatus"
+//v-model="partNameList"
 import { mapGetters } from "vuex";
   export default {
     // !! to write special function to getPartNames from parts which id presents in lots

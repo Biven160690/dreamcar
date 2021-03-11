@@ -18,6 +18,11 @@ export default {
                 "name": "Suspension",
                 "description": "suspension fhdkhdffdfdgh",
               },
+              {
+                "id": 4,
+                "name": "Headlight",
+                "description": "headlight hskjfkf jjjbb, dndkf.",
+              },
         ]
     },
     /*

@@ -10,7 +10,7 @@ export default {
                 "part_description": "brake disc kjhkjhfkdhgkdh",
                 "quantity": 50,
                 "status": "open",
-                "expirationDate": "2021-03-18",
+                "expirationDate": "2021-03-11 19:08",
                 "desiredPrice": 90,
                 "bid": 120
               },
@@ -21,7 +21,7 @@ export default {
                 "part_description": "suspension fhdkhdffdfdgh",
                 "quantity": 10,
                 "status": "closed",
-                "expirationDate": "2021-03-09",
+                "expirationDate": "2021-03-09 18:00",
                 "desiredPrice": 75,
                 "bid": 70
               },
@@ -38,8 +38,8 @@ export default {
         updateStatuses(state) {
             var time = new Date()
             for (var i = 0; i < state.lots.length; i++) {
-              if (state.lots[i].desired >= state.lots[i].bit ||
-                Date.parse(state.lots[i].time) < time) {
+              if ((state.lots[i].desiredPrice >= state.lots[i].bid) ||
+                  (Date.parse(state.lots[i].expirationDate) < time)) {
                     if(state.lots[i].status != "closed")
                     {
                         state.lots[i].status = "closed";
